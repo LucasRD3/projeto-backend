@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'https://gleaming-meerkat-0fdcfc.netlify.app,
+    origin: process.env.FRONTEND_URL || 'https://gleaming-meerkat-0fdcfc.netlify.app/', // Usa a variável de ambiente FRONTEND_URL
     credentials: true
 }));
 app.use(express.json());
@@ -39,7 +39,7 @@ const isValidPassword = (password) => {
 
 // Rota de teste
 app.get('/', (req, res) => {
-    res.json({ 
+    res.json({
         message: 'API de Registro funcionando!',
         version: '1.0.0',
         endpoints: {
@@ -226,13 +226,13 @@ app.get('/api/users', (req, res) => {
     if (process.env.NODE_ENV === 'production') {
         return res.status(403).json({ message: 'Endpoint não disponível em produção' });
     }
-    
+
     const usersData = users.map(user => ({
         id: user.id,
         email: user.email,
         criadoEm: user.criadoEm
     }));
-    
+
     res.json({
         success: true,
         count: usersData.length,
